@@ -42,11 +42,16 @@ def detail(request, question_id):
 
     # return HttpResponse("You're looking at question %s." % question_id)
 
+    # 2) 실습
+    # question = Question.objects.get(pk=question_id)
+
+    # 3) try ~ except문
     # try:
     #     question = Question.objects.get(pk=question_id)
     # except Question.DoesNotExist:
     #     raise Http404('Question does not exist')
 
+    # 4) short cut
     question = get_object_or_404(Question, pk=question_id)
     context = {
         'question': question

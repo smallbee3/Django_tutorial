@@ -13,10 +13,10 @@
 		<ul>
 			{% for question in latest_question_list %}
 			<li>
-{#				{% url 'detail' question_id=question.pk %}"#}
-{#				{% url 'detail' question.id %}#}
-{#				{% url 'detail' question.pk %}#}
-				<a href="{% url 'detail' question_id=question.pk %}">
+<!--{#				{% url 'polls:detail' question_id=question.pk %}"#}-->
+<!--{#				{% url 'polls:detail' question.id %}#}-->
+<!--{#				{% url 'polls:detail' question.pk %}#}-->
+				<a href="{% url 'polls:detail' question_id=question.pk %}">
 					{{ question.question_text }}
 				</a>
 			</li>
