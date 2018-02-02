@@ -5,16 +5,18 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Polls</title>
+    <title>Detail</title>
 </head>
 <body>
-{% if latest_question_list %}
+{% if question %}
 <!--지금 필요한게 이라는것을 알 수 있는 부분-->
-<h1>{{ question.question_text }}</h1>
+
+<h1></h1>
 <ul>
-    {% for question in latest_question_list %}
-    <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }}</a></li>
     {% endfor %}
+
 </ul>
 {% else %}
 <p>No polls are available.</p>
