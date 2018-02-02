@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 # from django.polls.models import Question
 # django 라는 같은 이름의 패키지에서 찾으려고해서 문제 발생.
@@ -42,7 +42,11 @@ def detail(request, question_id):
 
     # return HttpResponse("You're looking at question %s." % question_id)
 
-    question = Question.objects.get(pk=question_id)
+    try:
+        question = Question.objects.get(pk=question_id)
+
+    except Question.DoesNotExist:
+        raise Http404('Question does not exist')
     context = {
         'question': question
     }

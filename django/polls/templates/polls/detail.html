@@ -10,8 +10,7 @@
 <body>
 {% if question %}
 <!--지금 필요한게 이라는것을 알 수 있는 부분-->
-
-<h1></h1>
+<h1>{{ question.question_text }}</h1>
 <ul>
     {% for choice in question.choice_set.all %}
     <li>{{ choice.choice_text }}</a></li>
