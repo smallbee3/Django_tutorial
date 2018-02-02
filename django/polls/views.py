@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from django.http import HttpResponse, Http404
 
@@ -6,7 +6,7 @@ from django.http import HttpResponse, Http404
 # django 라는 같은 이름의 패키지에서 찾으려고해서 문제 발생.
 from django.template import loader
 
-from .models import Question
+from .models import Question, Choice
 
 
 def index(request):
@@ -67,4 +67,24 @@ def results(request, question_id):
 
 
 def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
+    # return HttpResponse("You're voting on question %s." % question_id)
+
+
+    # if request.method == 'POST':
+    #     choice = request.POST['choice']
+    #     return HttpResponse(choice)
+
+
+    # 1번
+    choice_pk = request.POST['choice']
+    # print(type(choice_pk))
+    choice = Choice.objects.get(pk=choice_pk)
+    # pk 값에 str를 주던지
+
+    choice.votes += 1
+    choice.save()
+
+
+    # 2번
+    return redirect('polls:results', question_id=question_id)
+
