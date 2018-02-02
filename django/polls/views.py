@@ -2,9 +2,26 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
+# from django.polls.models import Question
+# django 라는 같은 이름의 패키지에서 찾으려고해서 문제 발생.
+from .models import Question
+
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    # return HttpResponse("Hello, world. You're at the polls index.")
+
+    # 가장 최근에 발행된 최대 4개의 Question목록
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+
+    # 쉼표 단위로 구분된 Question목록의 각 항목의 Question_text로 만들어진 문자열
+    # output = ', '.join([q.question_text for q in latest_question_list])
+    # return HttpResponse(output)
+
+    # 수업시간 실습 - 안보고 해보기 14:59
+    context = {
+        'latest_question_list': latest_question_list,
+    }
+    return render(request, 'polls/index.html', context)
 
 
 def detail(request, question_id):
