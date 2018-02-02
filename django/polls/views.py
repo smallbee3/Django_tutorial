@@ -59,13 +59,6 @@ def detail(request, question_id):
     return render(request, 'polls/detail.html', context)
 
 
-
-
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-
 def vote(request, question_id):
     # return HttpResponse("You're voting on question %s." % question_id)
 
@@ -88,3 +81,19 @@ def vote(request, question_id):
     # 2번
     return redirect('polls:results', question_id=question_id)
 
+
+
+
+def results(request, question_id):
+    # response = "You're looking at the results of question %s."
+    # return HttpResponse(response % question_id)
+
+    # 박살
+    # choice_pk = request.POST['choice']
+    # choice = Choice.objects.get(pk=choice_pk)
+
+    question = Question.objects.get(pk=question_id)
+    context = {
+        'question': question,
+    }
+    return render(request, 'polls/results.html', context)
